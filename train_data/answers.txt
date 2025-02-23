@@ -1,0 +1,2 @@
+I personally like to setup an SFTP for each class, that way I just need to have that class's folder open in VSCode rather than every single class in order to have access to the SFTP syncing. So yes, you can proceed with setting up the SFTP syncing like the instructions say, just make sure you're doing it while in your cs15 folder in VSCode. Follow up if you have any other questions about getting it set up!You can also open up your old cs11 folder in VSCode and take a look at what you did for SFTP if you're curious.
+Yep! Making this public for others.

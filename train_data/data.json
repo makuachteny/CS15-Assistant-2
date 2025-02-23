@@ -1,0 +1,338 @@
+[
+  {
+    "role": "user",
+    "content": "I took cs11 last semester, and I am not completely sure if I synced entire account's contents or only the cs11 folder. Would it be appropriate to complete the vscode_setup guide anyway?"
+  },
+  {
+    "role": "assistant",
+    "content": "I personally like to setup an SFTP for each class, that way I just need to have that class's folder open in VSCode rather than every single class in order to have access to the SFTP syncing. So yes, you can proceed with setting up the SFTP syncing like the instructions say, just make sure you're doing it while in your cs15 folder in VSCode. Follow up if you have any other question about getting it set up! You can also open up your old cs11 folder in VSCode and take a look at what you did for SFTP if you're curious."
+  },
+  {
+    "role": "user",
+    "content": "In the hw1 spec, can i use the std::stringstream to implement to string. The same way that was done in the lab1?"
+  },
+  {
+    "role": "assistant",
+    "content": "You should be able to use std::stringstream for converting to string, especially if it was used in the lab. Just ensure you're using it according to the specific requirements of the homework spec. If you run into any issues, feel free to ask!"
+  },
+  {
+    "role": "user",
+    "content": "Could you please help me understand how the what() function knows what message to print? In third_attempt_access, we are calling catch() from &e, but it looks like we never created the e object. I read a geeksforgeeks article about exceptions, and they created a special struct for their exception. I am guessing that our exception is created when we use throw(), but would appreciate confirmation/disproval."
+  },
+  {
+    "role": "assistant",
+    "content": "In the following code:\n\ntry {\n   int result = attempt_access(arr, size, index);\n   cout << \"Successfully accessed element!\" << endl;\n   return result;\n}\ncatch (const range_error &e) {\n   cout << \"We just got the following error message:\\n\";\n   cout << e.what();\n   return 0;\n}\n\nThe line \"catch (const range_error &e)\" is what actually initializes and binds the variable e. Exceptions are actually just objects in C++, and as a result of that line, e is bound to the range_error object that is thrown as a result of the faulty access. We can then call the \"what()\" method on e, which returns the error message that is associated with that exception.\n\nHopefully that makes sense, but please let us know if you still have question!"
+  },
+  {
+    "role": "user",
+    "content": "Section (F) of the README requirements in the homework spec, which asks for an outline of the data structures and algorithms you used, says to 'Please pick a couple interesting/complex algorithms to discuss in the README'. What is this question looking for? In the context of CharArrayList, what would be interesting/complex algorithms? What should this discussion entail?"
+  },
+  {
+    "role": "assistant",
+    "content": "An algorithm is a set of steps to accomplish a task or solve a problem. For example, in lecture you all saw the steps or algorithm for expanding an array: Allocate a new, larger array, copy the elements over, and recycle the old array. It's high-level (minimal implementation details), but it describes how you solved a problem.\n\nYou can describe a few algorithms that you implemented for this homework. Most of them are straightforward, but they will get more involved in later assignments."
+  },
+  {
+    "role": "user",
+    "content": "The spec specifies that when we call insertAt, all of the elements to the right of the indicated index should shift one spot to the right. Should removeAt do the opposite? Meaning, should all of the elements to the right of the removed char shift back one spot to the left to fill the 'hole' that the removed char leaves? My question also applies to popFromFront. Thanks!"
+  },
+  {
+    "role": "assistant",
+    "content": "I think the spec intro answers your question for you: 'Note that an array list cannot have “holes”: if you remove the fifth element (element 4) from a 10-element array list, then there are 9 elements left, and their positions are 0 through 8.'"
+  },
+  {
+    "role": "user",
+    "content": "How should we handle a case with an empty array list when replacing? Since 0 would technically still be in range of the index should be we able to replace?"
+  },
+  {
+    "role": "assistant",
+    "content": "When the spec says the range is [0 ... SIZE), [ is an inclusive boundary and ) is an exclusive boundary. You should not be able to replace at an index equal to the size.(EDIT: replace, not insert)"
+  },
+  {
+    "role": "user",
+    "content": "In part D of the read me where it states: 'The files that you provided and a short description of what each file is and its purpose' Is this asking for all the files we are submitting, including timer_main.cpp, simple_exception.cpp, and Makefile? Or just the files we directly affected, like CharArrayList.cpp, CharArrayList.h, and unit_test.h? Thanks!"
+  },
+  {
+    "role": "assistant",
+    "content": "You should list and describe any file you submit and only submit the files your program depends on. So, you don't need to submit timer_main.cpp or simple_exception.cpp thanks!"
+  },
+  {
+    "role": "user",
+    "content": "Is it necessary to have a recursive function helper specifically for replaceAt? I can implement replaceAt with two other public functions and inside those functions are recursivehelpers. I'm asking this just to be clearer: replaceAt() { publicfunc1() { recursionhelper() }; publicfunc2() { recursionhelper() }; } or does it have to be this: replaceAt() { recursiveHelperForReplaceAt(); }"
+  },
+  {
+    "role": "assistant",
+    "content": "The spec says to use recursion so use recursion to get the most points. Additionally, only the methods that are listed in the spec as public should be public."
+  },
+  {
+    "role": "user",
+    "content": "Hello! I am passing all of my unit tests. However, I got 15 points off on the autograder. I was wondering if you could give me any tips on where to start looking. Thank you!"
+  },
+  {
+    "role": "assistant",
+    "content": "Hi - there could be many places where points are being lost. First take a look at the autograder score - are you passing all the available tests, and the style check? If you are passing all, then you are likely failing some hidden tests. I would then check the spec. We are highly specific with things like our error messages, so double check not only that you are throwing the right messages and constructing the right strings, but also that you are asserting them correctly. The spec will also mention specific cases that we will test, like self-concatenation. If all that fails, you likely need more unit tests. Make sure you are testing all functions for all cases (including throwing errors). We highly recommend you follow the form for the insertAt tests provided for you. I am making this public in case other students have similar questions/issues. If you have particular questions about code, please make a private post."
+  },
+  {
+    "role": "user",
+    "content": "Can you explain the difference between a deep copy and a shallow copy?"
+  },
+  {
+    "role": "assistant",
+    "content": "A shallow copy copies the object's structure but not the elements within it, meaning both the original and the copy share the same elements. A deep copy, on the other hand, duplicates everything, including the elements, so the original and the copy are completely independent."
+  },
+  {
+    "role": "user",
+    "content": "What is the purpose of a virtual destructor in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "A virtual destructor ensures that the destructor of the derived class is called when an object is deleted through a base class pointer. This is important for proper resource cleanup in polymorphic base classes."
+  },
+  {
+    "role": "user",
+    "content": "How do you handle memory leaks in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "Memory leaks in C++ can be handled by ensuring that every allocation with `new` is paired with a corresponding `delete`, using smart pointers like `std::unique_ptr` or `std::shared_ptr`, and employing tools like Valgrind to detect leaks."
+  },
+  {
+    "role": "user",
+    "content": "What is the difference between `std::vector` and `std::array` in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "`std::vector` is a dynamic array that can change size, while `std::array` is a fixed-size array. `std::vector` provides more flexibility but has overhead for dynamic memory management, whereas `std::array` is more efficient but less flexible."
+  },
+  {
+    "role": "user",
+    "content": "Can you explain the concept of RAII in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "RAII (Resource Acquisition Is Initialization) is a programming idiom in C++ where resource allocation is tied to object lifetime. Resources are acquired in a constructor and released in a destructor, ensuring proper cleanup and preventing leaks."
+  },
+  {
+    "role": "user",
+    "content": "What is the difference between `std::map` and `std::unordered_map`?"
+  },
+  {
+    "role": "assistant",
+    "content": "`std::map` is an ordered associative container that stores key-value pairs in a sorted order, typically implemented as a balanced binary tree. `std::unordered_map` is an unordered associative container that uses a hash table for faster access but does not maintain any order."
+  },
+  {
+    "role": "user",
+    "content": "How does the `const` keyword affect member functions in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "The `const` keyword in member functions indicates that the function does not modify the state of the object. It allows the function to be called on `const` instances of the class and ensures that no member variables are altered."
+  },
+  {
+    "role": "user",
+    "content": "What is the purpose of the `explicit` keyword in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "The `explicit` keyword is used to prevent implicit conversions and copy-initialization that might otherwise occur with single-argument constructors. It ensures that constructors must be called explicitly, improving code clarity and preventing unintended conversions."
+  },
+  {
+    "role": "user",
+    "content": "Can you explain the difference between `public`, `protected`, and `private` inheritance in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "In `public` inheritance, public and protected members of the base class remain public and protected in the derived class. In `protected` inheritance, public and protected members of the base class become protected in the derived class. In `private` inheritance, all public and protected members of the base class become private in the derived class."
+  },
+  {
+    "role": "user",
+    "content": "What is the purpose of the `override` keyword in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "The `override` keyword indicates that a member function is intended to override a virtual function in a base class. It helps catch errors at compile time if the function does not actually override any base class function due to a mismatch in the function signature."
+  },
+  {
+    "role": "user",
+    "content": "How do you implement a singleton pattern in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "A singleton pattern can be implemented by making the constructor private, deleting the copy constructor and assignment operator, and providing a static method that returns a reference to the single instance of the class. Example:\n\n```cpp\nclass Singleton {\nprivate:\n    Singleton() {}\n    Singleton(const Singleton&) = delete;\n    Singleton& operator=(const Singleton&) = delete;\npublic:\n    static Singleton& getInstance() {\n        static Singleton instance;\n        return instance;\n    }\n};\n```"
+  },
+  {
+    "role": "user",
+    "content": "What is the difference between `new` and `malloc` in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "`new` allocates memory and calls the constructor for object initialization, while `malloc` only allocates memory without calling any constructors. `new` also returns a typed pointer, whereas `malloc` returns a `void*` that needs to be cast."
+  },
+  {
+    "role": "user",
+    "content": "Can you explain the concept of move semantics in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "Move semantics allow the resources of a temporary object to be moved rather than copied, improving performance. This is achieved using move constructors and move assignment operators, which transfer ownership of resources from the source to the destination object."
+  },
+  {
+    "role": "user",
+    "content": "What is the purpose of the `decltype` keyword in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "The `decltype` keyword is used to query the type of an expression at compile time. It allows you to declare variables with the same type as a given expression without explicitly specifying the type."
+  },
+  {
+    "role": "user",
+    "content": "How do you handle exceptions in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "Exceptions in C++ are handled using `try`, `catch`, and `throw` blocks. Code that may throw an exception is placed inside a `try` block, and the exception is caught and handled in a `catch` block. The `throw` keyword is used to throw an exception."
+  },
+  {
+    "role": "user",
+    "content": "What is the difference between `std::shared_ptr` and `std::unique_ptr`?"
+  },
+  {
+    "role": "assistant",
+    "content": "`std::shared_ptr` is a smart pointer that maintains a reference count and allows multiple pointers to share ownership of the same object. `std::unique_ptr` is a smart pointer that has exclusive ownership of the object and cannot be copied, only moved."
+  },
+  {
+    "role": "user",
+    "content": "Can you explain the concept of template specialization in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "Template specialization allows you to define a specific implementation of a template for a particular type or set of types. This can be done using full specialization for a single type or partial specialization for a subset of types."
+  },
+  {
+    "role": "user",
+    "content": "What is the purpose of the `constexpr` keyword in C++?"
+  },
+  {
+    "role": "assistant",
+    "content": "The `constexpr` keyword is used to indicate that a function or variable can be evaluated at compile time. This allows for optimizations and ensures that the value is constant and can be used in contexts that require compile-time constants."
+  },
+  {
+    "role": "user",
+    "content": "I took cs11 last semester, and I am not completely sure if I synced entire account's contents or only the cs11 folder. Would it be appropriate to complete the vscode_setup guide anyway?"
+  },
+  {
+    "role": "assistant",
+    "content": "I personally like to setup an SFTP for each class, that way I just need to have that class's folder open in VSCode rather than every single class in order to have access to the SFTP syncing. So yes, you can proceed with setting up the SFTP syncing like the instructions say, just make sure you're doing it while in your cs15 folder in VSCode. Follow up if you have any other question about getting it set up! You can also open up your old cs11 folder in VSCode and take a look at what you did for SFTP if you're curious."
+  },
+  {
+    "role": "user",
+    "content": "Are we allowed to use range-based for loops for iterating through lists as shown below?"
+  },
+  {
+    "role": "assistant",
+    "content": "Looks good! Range-based loops are a simple and elegant way to iterate over a data structure. You’re definitely welcome to use them."
+  },
+  {
+    "role": "user",
+    "content": "The spec for Project 1 says that we must use std::vector or std::list to represent the passengerQueue, but also gives a specific list of public functions to adhere to. I understand that std::vector and std::list have built-in functionality (far exceeding the specified functionality). Is the idea to use a std::vector, for example, and then build the listed public functions ourselves to use instead of the other built-in things?"
+  },
+  {
+    "role": "assistant",
+    "content": "You can (and should!) use std::vector/std::list's built-in functions, such as front() and push/pop methods, as 'it will greatly reduce how much code you’ll need to write/rework.' When building PassengerQueue's public functions, the idea is not to reimplement functionality that std::vector or std::list already provides, but rather to decide which built-in methods best support the required operations."
+  },
+  {
+    "role": "user",
+    "content": "I was reading through some of the member types and functions included in the vector library on cplusplus and saw that size_t is a member type used to represent any non-negative integer. I wondered if using size_t rather than ints when making for loops would be better. Are there any other differences between int and size_t? Or could I use size_t instead of int?"
+  },
+  {
+    "role": "assistant",
+    "content": "Good question! Just like you said, size_t is simply a non-negative integer. It's important to note though that occasionally this can pose some issues related to casting. For example, if I have some variable 'int x' that I think is positive but somehow became negative, and I return x from a function with return type size_t (or some other casting scenario), I am now actually returning a number that I probably don't want. Because when my code tries to turn a negative integer into a non-negative size_t, it'll do some conversions that can cause unexpected behavior.\n\nThat said, you probably won't be using size_t a ton in this class aside from seeing it as the return type of some standard library functions. In which case, keep my casting note above in mind when you call and save the results of these functions.\n\nI guess it's up to you then whether you use size_t instead of int as your iterator for for loops. You do have complete control over what your 'int i' is for the entirety of your for loop, so it's not like there's a chance it might randomly become negative and you want some built-in check to always keep it positive."
+  },
+  {
+    "role": "user",
+    "content": "Can we create multiple files that function as unit_test.h (ie: unit_test_passenger.h and unit_test_main.h)?\n\nIf so, how would we do this, and how could we change the unit_test command to unit_test_passenger or unit_test_main?"
+  },
+  {
+    "role": "assistant",
+    "content": "Given that you don't have access to our unit_test_driver code, it's not possible to do explicitly what you're saying. You could alternatively just break up unit_tests.h using big block comments and have a section for passenger and a section for main. Or if you really want multiple different testing programs for the separate functionality, you could make your own test_passenger.cpp that has a main that runs a set of tests that you make. And then simply create a Makefile rule to turn this into an executable to run.\n\nKeep in mind though that C++ doesn't allow more than 1 file with a main() to be compiled together, so you'll have to make sure that test_passenger.cpp doesn't ever get compiled or linked with your main.cpp. This isn't an issue as long as the files are kept independent of each other."
+  },
+  {
+    "role": "user",
+    "content": "I am using a list for the passenger queue, and to print I need to iterate through the list, can I use range-based for loop, because I can't access each element within the list. Is that okay?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, please see."
+  },
+  {
+    "role": "user",
+    "content": "Is it generally best practice to #include .h files and libraries every time, even if not necessary, for clarity? Or is it unnecessary/redundant?"
+  },
+  {
+    "role": "assistant",
+    "content": "If I remember correctly from lecture, it's best practice to #include h files in every file that uses that class, even if it has been indirectly included."
+  },
+  {
+    "role": "user",
+    "content": "Does the Queue/List of passengers on the train need to be a PassengerQueue or can it be an ArrayList/Vector? I know the stations need to be represented as PassengerQueues but I was not sure about the representation of the passengers on the train."
+  },
+  {
+    "role": "assistant",
+    "content": "I'm pretty sure the passengers on the train must be in a PassengerQueue, but the ones waiting at different stations do not have to."
+  },
+  {
+    "role": "user",
+    "content": "Hello! Do we have to write individual unit tests for each method we write in the PassengerQueue class?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, you should always test every function you implement."
+  },
+  {
+    "role": "user",
+    "content": "Hi, do we still have the 5 submissions for phase 1 of the project?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, 5 submissions for phase 1 and 5 submissions for phase 2."
+  },
+  {
+    "role": "user",
+    "content": "To clarify, the deliverables for phase one are:\n\nPassenger.h\nPassenger.cpp\nPassengerQueue.h\nPassengerQueue.cpp\nmetro_design_checkoff.txt\nREADME\n\nIs that correct? Also, do we need to submit evidence of testing?"
+  },
+  {
+    "role": "assistant",
+    "content": "The only points you get are from the autograder so I'd assume not. But you will need evidence of testing of phase 1 code during the final submission, so might as well do it now!"
+  },
+  {
+    "role": "user",
+    "content": "Are we solely being graded on functionality via the auto-grader, or are we also being graded on questions in our README, header and in-line comments, the 80 character limit, and other style guidelines?"
+  },
+  {
+    "role": "assistant",
+    "content": "Phase 1 is just autograder results. The autograder might implicitly count some style stuff like the use of &&, ||, 80 character limit, etc. We won't be reading the README or checking for inline comments per se. That being said, it's probably in your best interest to write inline comments as you go, and to do your best to keep the phase 1 submission to the 15 style guide since you'll be using this code in your final project as well (and we will check it for style then)."
+  },
+  {
+    "role": "user",
+    "content": "Do we need to handle the case where not enough files are provided by the user?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes. Please refer to the spec for the exact error message to output for this case."
+  },
+  {
+    "role": "user",
+    "content": "Since the metrosim provided creates an output file, do we also have to create an output file if it doesn't exist?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, but the good news is that this is easily done with ofstream."
+  },
+  {
+    "role": "user",
+    "content": "Does the Makefile also have an 80 character line limit? If so, how can we split up the lines?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, it's good to keep the Makefile under that limit. You can use a backslash (\\) to split the lines up."
+  }
+]

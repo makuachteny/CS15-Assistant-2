@@ -1,0 +1,101 @@
+question: I took cs11 last semester, and I am not completely sure if I synced entire account's contents or only the cs11 folder.Would it be appropriate to complete the vscode_setup guide anyway?
+answer:
+I personally like to setup an SFTP for each class, that way I just need to have that class's folder open in VSCode rather than every single class in order to have access to the SFTP syncing. So yes, you can proceed with setting up the SFTP syncing like the instructions say, just make sure you're doing it while in your cs15 folder in VSCode. Follow up if you have any other question about getting it set up!You can also open up your old cs11 folder in VSCode and take a look at what you did for SFTP if you're curious.
+
+question: In the hw1 spec, can i use the std::stringstream to implement to string. The same way that was done in the lab1?
+answer: 
+question: Could you please help me understand how the what() function knows what message to print? In third_attempt_access, we are calling catch() from &e, but it looks like we never created the e object. I read a geeksforgeeks article about exceptions, and they created a special struct for their exception. I am guessing that our exception is created when we use throw(), but would appreciate confirmation/disproval.
+answer: 
+In the following code:
+
+try {
+   int result = attempt_access(arr, size, index);
+   cout << "Successfully accessed element!" << endl;
+   return result;
+}
+catch (const range_error &e) {
+   cout << "We just got the following error message:\n";
+   cout << e.what();
+   return 0;
+}
+
+The line "catch (const range_error &e)" is what actually initializes and binds the variable e. Exceptions are actually just objects in C++, and as a result of that line, e is bound to the range_error object that is thrown as a result of the faulty access. We can then call the "what()" method on e, which returns the error message that is associated with that exception.
+
+Hopefully that makes sense, but please let us know if you still have question!
+
+question: Section (F) of the README requirements in the homework spec, which asks for an outline of the data structures and algorithms you used, says to "Please pick a couple interesting/complex algorithms to discuss in the README".What is this question looking for? In the context of CharArrayList, what would be interesting/complex algorithms? What should this discussion entail?
+answer: An algorithm is a set of steps to accomplish a task or solve a problem. For example, in lecture you all saw the steps or algorithm for expanding an array: Allocate a new, larger array, copy the elements over, and recycle the old array. It's high-level (minimal implementation details), but it describes how you solved a problem. 
+You can describe a few algorithms that you implemented for this homework. Most of them are straightforward, but they will get more involved in later assignments.
+
+question: The spec specifies that when we call insertAt, all of the elements to the right of the indicated index should shift one spot to the right. Should removeAt do the opposite? Meaning, should all of the elements to the right of the removed char shift back one spot to the left to fill the "hole" that the removed char leaves? My question also applies to popFromFront. Thanks!
+
+answer:I think the spec intro answers your question for you: "Note that an array list cannot have “holes”: if you remove the fifth element (element 4) from a 10-element array list, then there are 9 elements left, and their positions are 0 through 8."
+
+question: How should we handle a case with an empty array list when replacing. Since 0 would technically still be in range of the index should be be able to replace?
+answer: When the spec says the range is [0 ... SIZE), [ is an inclusive boundary and ) is an exclusive boundary. You should not be able to replace at an index equal to the size.(EDIT: replace, not insert)
+
+question: In part D of the read me where it states: "The files that you provided and a short description of what each file is and its purpose" Is this asking for all the files we are submitting, including timer_main.cpp, simple_exception.cpp, and Makefile? Or just the files we directly affected, like CharArrayList.cpp, CharArrayList.h, and unit_test.h?Thanks!
+answer: You should list and describe any file you submit and only submit the files your program depends on. So, you don't need to submit timer_main.cpp or simple_exception.cpp
+thanks!
+
+question: Is it necessary to have a recursive function helper specifically for replaceAt?
+I can implement replaceAt with two other public functions and inside those functions are recursivehelpers. 
+I'm asking this just to be clearer:
+replaceAt() {
+
+publicfunc1() { recursionhelper() };
+publicfunc2() { recursionhelper() };
+} 
+or does it have to be this:
+replaceAt() {
+recursiveHelperForReplaceAt();
+
+}
+
+answer: The spec says to use recursion so use recursion to get the most points. Additionally, only the methods that are listed in the spec as public should be public.
+
+question: Hello! I am passing all of my unit tests. However, I got 15 points off on the autograder. I was wondering if you could give me any tips on where to start looking. Thank you!
+answer: Hi - there could be many places where points are being lost. First take a look at the autograder score - are you passing all the available tests, and the style check? If you are passing all, then you are likely failing some hidden tests. I would then check the spec. We are highly specific with things like our error messages, so double check not only that you are throwing the right messages and constructing the right strings, but also that you are asserting them correctly. The spec will also mention specific cases that we will test, like self-concatenation.
+If all that fails, you likely need more unit tests. Make sure you are testing all functions for all cases (including throwing errors). We highly recommend you follow the form for the insertAt tests provided for you.I am making this public in case other students have similar questions/issues. If you have particular questions about code, please make a private post.
+
+question: I'm a little confused on what Q3 of the README is asking. Are we assuming the client knows what goes under the hood behind all the functions?
+answer: A client will never know what goes on under the hood, that's the purpose of abstraction. Q3 is saying to suppose a client is using CharArrayList, what changes would they need to make to instead use CharLinkedList? For example, unit_test was a client of CharArrayList in HW1. Think about the changes you had to make to your HW1 tests to transform them into a client of CharLinkedList for HW2. I hope that example puts the question into more concrete terms, but follow up if you'd like more clarification!
+
+question: The project spec seems to imply that we are required to use std::vector or std:: list when "representing 'lists' of various data types" (as opposed to writing our own implementations). Is there any reason why we cannot use an array of PassengerQueues to represent the train? After all, the number of stations is fixed for a given run of the program. (This wouldn't be representing a "list" of a data type so I wouldn't think it would mean the std::vector or std::list requirement applies, but the note about using std::vector or std::list is put right after the part of the spec describing the train, so I'm unsure if it's referencing that specifically.)
+answer: Yes, you can just use an array instead of a list or vector. That being said, there are some advantages to using a list of vector in place of an array. The main one is that you can just continually add to the back of either of those std libraries, whereas for an array you need to know exactly how many stations there are. The way our stations file is oriented, you may have to read the stations file twice: first, to get the appropriate size for the array you wish to construct, and a second time to actually populate it. I suppose you could also try to allocate something on the heap with a capacity and double it, but at that point it's almost certainly easier to use a vector or a list. Given this does not contain any code or any of your submission-specific questions, I will make this post public in case other students have similar questions.
+
+question: How should we test the print functions given that they take the parameter "std::ostream &output"? Is there a way to use try/catch and retrieve the output, similar to what we did for errors in the Array and Linked List homework?
+answer: I declared an std::stringstream, like some of the pre-provided unit_tests did in HW1, and then passed that std::stringstream to the print function. Then [stringstream name].str() returns it as a string, which you can compare to something else in assert( )
+
+question: This may be a silly question but for the PassengerQueue class the spec lists the required functions and then states, "You may not add any other public functions" without listing a constructor and a destructor for the class. Is it correct to assume that we should still write a constructor and a destructor for this class?
+answer: Since they recommend using std::vector or std::list both of these imports contain the big three, so constructors and deconstructs are already covered and implemented.
+
+question: I was reading through some of the member types and functions included in the vector library on cplusplus and saw that size_t is a member type used to represent any non-negative integer. I wondered if using size_t rather than ints when making for loops would be better. Are there any other differences between int and size_t? Or could I use size_t instead of int?
+answer: Good question! Just like you said, size_t is simply a non-negative integer. It's important to note though that occasionally this can pose some issues related to casting. For example, if I have some variable "int x" that I think is positive but somehow became negative, and I return x from a function with return type size_t (or some other casting scenario), I am now actually returning a number that I probably don't want. Because when my code tries to turn a negative integer into a non-negative size_t, it'll do some conversions that can cause unexpected behavior. That said, you probably won't be using size_t a ton in this class aside from seeing it as the return type of some standard library functions. In which case, keep my casting note above in mind when you call and save the results of these functions. I guess it's up to you then whether you use size_t instead of int as your iterator for for loops. You do have complete control over what your "int i" is for the entirety of your for loop, so it's not like there's a chance it might randomly become negative and you want some built in check to always keep it positive.
+
+question: Are we solely being graded on functionality via the auto-grader, or are we also being graded on questions in our README, header and in-line comments, the 80 character limit, and other style guidelines?
+answer: Phase 1 is just autograder results. The autograder might implicitly count some style stuff like the use of &&, ||, 80 character limit, etc. We won't be reading the README or checking for inline comments per se. That being said, it's probably in your best interest to write inline comments as you go, and to do your best to keep the phase 1 submission to the 15 style guide since you'll be using this code in your final project as well (and we will check it for style then).
+
+question: Do we have to check if the station numbers are correct when we construct a passenger object? For example, if I made my starting station 3000, what error should I throw?
+answer: The Passenger objects are independent of the stations. The station is a client of Passenger (it uses instances of the Passenger or PassengerQueue class, not the other way around). So there would be no way for you to check within Passenger.cpp whether the given arrival and departure stations are in fact valid stations since the passenger has no clue what a valid station even means! If someone were to misuse an instance of Passenger by giving it a station that doesn't exist, then that's their problem, not Passenger's.
+
+question: Are we allowed to use the getline() function to read from input files?
+answer: yes
+
+question: I would appreciate if you could advise me on writing a proper header for main.cpp. Would it be appropriate to write "This file contains functions that allow the client to build and use MetroSim through the command line."
+answer: The style guide mentions what we expect. Take a look at the "internal documentation" for more info. Making this public in case someone else has a similar question
+
+question: Just to clarify, we can use the FStream library we just can't use any actual fstream types but rather if stream or ofstream?
+answer: That's right.
+
+question: Is it ok if my Makefile has lines that are over 80 chars?
+answer: There's a way to allow dependencies to go on for multiple lines. Add a  \ at the end of the first line. See https://stackoverflow.com/questions/38086542/break-long-dependencies-in-makefile-into-several-lines if this explanation isn't clear enough.
+
+question: Could you please help me understand if it's possible to #include only <ios> to use all the stream types? For example, can I include only <ios> to use ofstream, istream, and cin/cout in one file? Additionally, I have included <ios> into my Passenger.h, PassengerQueue.h, and MetroSim.h. Can I include <ios> only into Passenger.h if my PassengerQueue.h is using Passenger.h, and my MetroSim.h is using PassengerQueue.h
+answer: The "ios" library does not include the streams that you typically need (cin, cout, cerr, file stream, ...). Including ios alone will not be sufficient for most purposes. Rather, ios is a base class that the other stream classes build on top of. To address your second question: typically, if your file uses some library, that file should directly include that library. You should do so even if some other code that you include already includes that library. The redundancy is fine—even if you could technically get away without it, it is could practice to directly include all libraries that your code needs. That way you are not dependent on some other code you are including being configured in a specific way. For example, if Passenger.h were to change and no longer need some specific library, we wouldn't want removing that library to indirectly break PassengerQueue.h and MetroSim.h. Include the code you need, and you will avoid such errors.
+
+question: Is it ok if my Makefile has lines that are over 80 chars
+answer: Yes, it's good to keep the Makefile under that limit. You can use a backslash (\) to split the lines up:
+target: dependencies1 dependencies2 \
+        dependencies3 dependencies4 ...
+        recipe 

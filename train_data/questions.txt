@@ -1,0 +1,3 @@
+I took cs11 last semester, and I am not completely sure if I synced entire account's contents or only the cs11 folder.Would it be appropriate to complete the vscode_setup guide anyway?
+In the hw1 spec, can i use the std::stringstream to implement to string. The same way that was done in the lab1?
+Could you please help me understand how the what() function knows what message to print? In third_attempt_access, we are calling catch() from &e, but it looks like we never created the e object. I read a geeksforgeeks article about exceptions, and they created a special struct for their exception. I am guessing that our exception is created when we use throw(), but would appreciate confirmation/disproval.
